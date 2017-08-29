@@ -1,0 +1,13 @@
+version: "2.0"
+services:
+  mongodbinst:
+    build: db-service
+    ports:
+      - "80:27017"
+  server-service:
+    build: server
+    ports:
+      - "8080:8080"
+    links:
+      - mongodbinst
+    restart: always
