@@ -26,13 +26,6 @@ docker-compose up
 
 Navigate to <http://localhost:8080> in your web browser.
 
-#### Install and start local web server
-```
-npm install
-node index.js or npm start
-```
-Na
-
 ## Running in the cloud
 
 Set up the manifest file for Cloud deployment
