@@ -1,7 +1,8 @@
-# Telescope : Label sensors data smartly
-In this repository we try to build a Multimedia Tiketing systemthat can take sounds, pictures, videos, logs etc.  for the smart machines  and put them together with the ticket. The another important feature of this application
+# Telescope : Label sensors data smartly using a multimedia ticketing system
+In this repository we try to build a Multimedia Tiketing system that can take sounds, pictures, videos, logs etc.  for the smart machines  and put them together with the ticket. The another important feature of this application
 is that it links the sensors data from the Predix TimeSeries with the ticket for the timeperiod mention in the ticket.
 It is a unique way of labeling the unlabeled sensor data.
+This application is built in node.js
 
 ## Running locally
 1. Edit the config.json to run the application locally for your UAA client.
