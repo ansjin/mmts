@@ -1,0 +1,30 @@
+{
+  "name": "predix_summer_school",
+  "version": "0.0.1",
+  "description": "IoT summer school Predix data access",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "authors": [
+    "anshul.jindal@tum.de"
+  ],
+  "license": "GPL",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.4",
+    "express-handlebars": "^3.0.0",
+    "mongodb": "^2.2.31",
+    "path": "^0.12.7",
+    "predix-uaa-client": "^1.2.2",
+    "q": "^1.5.0",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1"
+  }
+}

@@ -1,0 +1,871 @@
+<script src= "https://cdn.zingchart.com/zingchart.min.js"></script>
+<script src="/js/jquery/jquery.min.js"></script>
+
+<script> zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
+ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9","ee6b7db5b51705a13dc2339db3edaf6d"];</script>
+<style>
+
+    section {
+        display: none;
+        padding: 20px 0 0;
+        border-top: 1px solid #ddd;
+    }
+
+    input {
+        display: none;
+    }
+
+    label {
+        display: inline-block;
+        margin: 0 0 -1px;
+        padding: 15px 25px;
+        font-weight: 600;
+        text-align: center;
+        color: #09192A;
+        border: 1px solid transparent;
+    }
+
+    label:before {
+        font-family: fontawesome;
+        font-weight: normal;
+        margin-right: 10px;
+    }
+
+    label[for*='1']:before {
+        content: '\f02f';
+    }
+
+    label[for*='2']:before {
+        content: '\f02f';
+    }
+
+    label[for*='3']:before {
+        content: '\f02f';
+    }
+
+    label[for*='4']:before {
+        content: '\f02f';
+    }
+
+    label:hover {
+        color: #225081;
+        cursor: pointer;
+        border: 1px solid #225081;
+        border-top: 2px solid #225081;
+        border-bottom: 1px solid #E5EBF2;
+    }
+
+    input:checked + label {
+        color: #555;
+        border: 1px solid #225081;
+        border-top: 2px solid #225081;
+        border-bottom: 1px solid #E5EBF2;
+    }
+
+    #tab1:checked ~ #content1,
+    #tab2:checked ~ #content2,
+    #tab3:checked ~ #content3,
+    #tab4:checked ~ #content4 {
+        display: block;
+        border-top: 1px solid #225081;
+    }
+
+    @media screen and (max-width: 650px) {
+        label {
+            font-size: 0;
+        }
+
+        label:before {
+            margin: 0;
+            font-size: 18px;
+        }
+    }
+    @media screen and (max-width: 400px) {
+        label {
+            padding: 15px;
+        }
+    }
+    .zc-ref {
+        display: none;
+    }
+</style>
+<nav class="navbar-default navbar-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav" id="main-menu">
+
+            <li>
+                <a  href="/"><i class="fa fa-dashboard"></i> Dashboard</a>
+            </li>
+
+            <li>
+                <a href="#"><i class="fa fa-sitemap"></i> Machines<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a class="active-menu" href="/3dprinters">3D-Printers</a>
+                    </li>
+                    <li>
+                        <a href="#">Laser Cutters</a>
+                    </li>
+                    <li>
+                        <a href="#">Wood-Cutters</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+    </div>
+
+</nav>
+<!-- /. NAV SIDE  -->
+<div id="page-wrapper" >
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="page-header">
+                   3D-Printers
+                </h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+
+        <input id="tab1" type="radio" name="tabs" checked onclick="getNewDataPrinter('1d-ago', 'A')">
+        <label for="tab1">3D-Printer 1</label>
+
+        <input id="tab2" type="radio" name="tabs">
+        <label for="tab2">3D-Printer 2</label>
+
+        <input id="tab3" type="radio" name="tabs">
+        <label for="tab3">3D-Printer 3</label>
+
+        <section id="content1">
+
+
+            <div class="col-md-12 col-sm-6" >
+
+                    <div class="panel-body">
+                        <ul class="nav nav-pills">
+                            <li class="active" class=""><a href="#home-pills" data-toggle="tab" onclick="getNewDataPrinter('1d-ago', 'A')">Status</a>
+                            </li>
+                            <li class=""><a href="#profile-pills" data-toggle="tab">Raise Ticket</a>
+                            </li>
+                            <li class=""><a href="#messages-pills" data-toggle="tab">Close Ticket</a>
+                            </li>
+                            <li ><a href="#settings-pills" data-toggle="tab" onclick="getAllIssues()">Past Tickets</a>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content" style="margin-top: 10px">
+                            <div class="tab-pane fade active in" id="home-pills">
+                                <div class="row">
+                                    <div class="col-md-3 col-md-offset-1">
+                                            <div class="circle"><p><br><span>14:00:00</span><br>Running</p></div>
+
+                                    </div>
+                                    <div class="col-md-3 col-md-offset-1">
+                                        <div class="circle"><p><span>7</span><br>Avg. Number of Jobs Completed <br>per Day</p></div>
+
+                                    </div>
+                                    <div class="col-md-3 col-md-offset-1">
+                                        <div class="circle"><p><span>14hr</span><br>Avg. Working Duration per <br>Day</p></div>
+
+                                    </div>
+                                </div>
+                                <br>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                <ul class="nav nav-pills" style="float: right">
+                                    <button class="btn btn-default" onclick="getNewDataPrinter('1d-ago', 'A')"><i class=" fa fa-refresh "></i> Today</button>
+                                    <button class="btn btn-default" onclick="getNewDataPrinter('1w-ago', 'A')"><i class=" fa fa-calendar "></i> Last Week</button>
+                                    <button class="btn btn-default" onclick="getNewDataPrinter('1mm-ago', 'A')"><i class=" fa fa-calendar "></i> Last Month</button>
+                                </ul>
+                                    </div></div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="box box-success" >
+                                            <div class="box-header with-border">
+                                                <h3 class="box-title">All</h3>
+                                            </div>
+                                            <!-- /.box-header -->
+                                            <div class="box-body">
+                                                <div class="chart">
+                                                    <div id="timeSeriesData" style="height: 400px;"></div>
+
+                                                </div>
+                                                <div class="overlay" id = "overlayInstanceId">
+
+                                                    <i class="fa fa-refresh fa-spin"></i>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="box box-primary" >
+                                            <div class="box-header with-border">
+                                                <h3 class="box-title">VA average data</h3>
+                                            </div>
+                                            <!-- /.box-header -->
+                                            <div class="box-body">
+                                                    <div class="chart">
+                                                        <div id="VAData" style="height: 400px;"></div>
+
+                                                    </div>
+                                                    <div class="overlay" id = "overlayVAId">
+
+                                                        <i class="fa fa-refresh fa-spin"></i>
+
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" >
+                                        <div class="box box-primary" >
+                                            <div class="box-header with-border">
+                                                <h3 class="box-title">WATT average data</h3>
+                                            </div>
+                                            <!-- /.box-header -->
+                                            <div class="box-body">
+                                                <div class="chart">
+                                                    <div id="wattData" style="height: 400px;"></div>
+
+                                                </div>
+                                                <div class="overlay" id = "overlayWattDataId">
+
+                                                    <i class="fa fa-refresh fa-spin"></i>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <form role="form" method="get" action="" >
+                                        <div class="col-lg-3">
+
+                                            <div class="form-group">
+                                                <label>Tag</label>
+                                                <select name="tag" class="form-control" id="tag">
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="form-group">
+                                                <label>Number of Data Points</label>
+                                                <select name="numDataPoints" class="form-control" id="numDataPoints">
+                                                    <option value="5">5</option>
+                                                    <option value="10">10</option>
+                                                    <option value="20">20</option>
+                                                    <option value="100">100</option>
+                                                    <option value="500">500</option>
+                                                    <option value="1000">1000</option>
+                                                    <option value="10000">10000</option>
+                                                    <option value="0">No Limit</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="form-group">
+                                                <label>Number</label>
+                                                <input class="form-control" name= "numValue"  id="numValue" type="number" min="1" max="100" step="5" value ="1"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="form-group">
+                                                <label style="all: revert">Time</label>
+                                                <select name="time" class="form-control" id="time">
+                                                    <option value="ms-ago">ms-ago</option>
+                                                    <option value="s-ago">s-ago</option>
+                                                    <option value="mi-ago">mi-ago</option>
+                                                    <option value="h-ago">h-ago</option>
+                                                    <option value="d-ago">d-ago</option>
+                                                    <option value="w-ago">w-ago</option>
+                                                    <option value="mm-ago">mm-ago</option>
+                                                    <option value="y-ago">y-ago</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2" style="margin-top: 30px">
+                                            <br>
+                                            <input type="button" class="btn btn-success" value="Submit" onclick="getNewDataPost()"></input>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        <div class="box box-success">
+                                            <div class="box-header with-border">
+                                                <h3 class="box-title">TimeSeries Data unternehmer-3dprinters</h3>
+                                            </div>
+
+                                            <div class="chart">
+                                                <!-- Sales Chart Canvas -->
+                                                <div id="timeSeriesDataOptions" style="height: 350px;"></div>
+
+                                            </div>
+                                            <div class="overlay" id = "overlaytimeSeriesDataOptions">
+
+                                                <i class="fa fa-refresh fa-spin"></i>
+
+                                            </div>
+
+                                            <!-- /.chart-responsive -->
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="profile-pills">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="box box-info" >
+                                            <div class="box-header with-border">
+                                                <h3 class="box-title">Raise a new Ticket</h3>
+                                            </div>
+                                            <!-- /.box-header -->
+                                            <div class="box-body">
+                                            <form id="form2" method="get" action="">
+                                                <div class="box-body">
+                                                    <table id="example2" class="table table-bordered table-hover">
+                                                        <thead>
+                                                        <tr>
+                                                            <th style="color: #3c8dbc">Field</th>
+                                                            <th style="color: #3c8dbc">Value</th>
+                                                            <th style="color: #3c8dbc">Field</th>
+                                                            <th style="color: #3c8dbc">Value</th>
+
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <th>Name of the Issuer</th>
+                                                            <td><input type="text" class="form-control" id="nameIssuer" name="nameIssuer" value=""></td>
+
+                                                            <th>Email of the Issuer</th>
+                                                            <td><input type="email" class="form-control" name="emailIssuer" id="emailIssuer" value=""></td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <th>Machine Id</th>
+                                                            <td><input class="form-control" id="machineId" name="machineId" value="3dprinterAId" type="text" placeholder="Disabled input" disabled=""></td>
+                                                            <th>Machine Detail</th>
+                                                            <td> <textarea class="form-control" id="machineDetail" name="machineDetail" value="machinedetail will be fetched from db" rows="3" disabled=""></textarea> </td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <th>Issue Problem Title</th>
+                                                            <td><input type="text" class="form-control" id="issueTitle" name="issueTitle" value=""></td>
+                                                            <th>Issue Problem Detail</th>
+                                                            <td> <textarea class="form-control" id="issueDetail" name="issueDetail" value="" rows="3"></textarea> </td>
+
+                                                        </tr>
+
+                                                        <tr>
+                                                        <th>Issue Occuring From</th>
+                                                            <td><input type="date" id="fromDate" class="form-control" name="fromDate" value=""></td>
+                                                            <th>To</th>
+                                                            <td><input type="date" id="toDate" class="form-control" name="toDate" value=""></td>
+                                                        </tr>
+
+
+                                                        <tr>
+                                                            <th>Attach Images</th>
+                                                            <td><input type="file" class="form-control" name="images[]" multiple></td>
+                                                            <th>Attach Recorded Sounds</th>
+                                                            <td><input type="file" class="form-control" name="sounds[]" multiple></td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <th >Attach Other Details if Any(Logs)</th>
+                                                            <td ><input type="file" class="form-control" name="others[]" multiple></td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Name of the Concerned person</th>
+                                                            <td><input type="text" id="nameRecv" class="form-control" name="nameRecv" value=""></td>
+
+                                                            <th>Email of the Concerned person</th>
+                                                            <td><input type="email"  id="emailRecv" class="form-control" name="emailRecv" value=""></td>
+                                                        </tr>
+
+                                                        </tbody>
+                                                        <tfoot>
+                                                        <tr>
+                                                            <th style="color: #3c8dbc">Field</th>
+                                                            <th style="color: #3c8dbc">Value</th>
+                                                            <th style="color: #3c8dbc">Field</th>
+                                                            <th style="color: #3c8dbc">Value</th>
+                                                        </tr>
+                                                        </tfoot>
+                                                    </table>
+                                                </div>
+                                                <!-- /.box-body -->
+                                                <br>
+                                                <br>
+                                                <td><input type="button" onclick="saveIssueProblem()" value="submit" class="btn btn-block btn-primary"></td>
+                                            </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="messages-pills">
+                                <h4>Messages Tab</h4>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            </div>
+                            <div class="tab-pane fade " id="settings-pills">
+                                <h4>Issues List</h4>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="box">
+                                            <!-- /.box-header -->
+                                            <div class="box-body">
+                                                <table id="products" class="table table-bordered table-hover" style="cursor:pointer">
+                                                </table>
+                                            </div>
+                                            <!-- /.box-body -->
+                                        </div>
+                                        <!-- /.box -->
+                                        <!-- /.box -->
+                                    </div>
+                                    <!-- /.col -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </section>
+
+        <section id="content2">
+            <p>
+                Bacon ipsum dolor sit amet landjaeger sausage brisket, jerky drumstick fatback boudin ball tip turducken. Pork belly meatball t-bone bresaola tail filet mignon kevin turkey ribeye shank flank doner cow kielbasa shankle. Pig swine chicken hamburger, tenderloin turkey rump ball tip sirloin frankfurter meatloaf boudin brisket ham hock. Hamburger venison brisket tri-tip andouille pork belly ball tip short ribs biltong meatball chuck. Pork chop ribeye tail short ribs, beef hamburger meatball kielbasa rump corned beef porchetta landjaeger flank. Doner rump frankfurter meatball meatloaf, cow kevin pork pork loin venison fatback spare ribs salami beef ribs.
+            </p>
+            <p>
+                Jerky jowl pork chop tongue, kielbasa shank venison. Capicola shank pig ribeye leberkas filet mignon brisket beef kevin tenderloin porchetta. Capicola fatback venison shank kielbasa, drumstick ribeye landjaeger beef kevin tail meatball pastrami prosciutto pancetta. Tail kevin spare ribs ground round ham ham hock brisket shoulder. Corned beef tri-tip leberkas flank sausage ham hock filet mignon beef ribs pancetta turkey.
+            </p>
+        </section>
+
+        <section id="content3">
+            <p>
+                Bacon ipsum dolor sit amet beef venison beef ribs kielbasa. Sausage pig leberkas, t-bone sirloin shoulder bresaola. Frankfurter rump porchetta ham. Pork belly prosciutto brisket meatloaf short ribs.
+            </p>
+            <p>
+                Brisket meatball turkey short loin boudin leberkas meatloaf chuck andouille pork loin pastrami spare ribs pancetta rump. Frankfurter corned beef beef tenderloin short loin meatloaf swine ground round venison.
+            </p>
+        </section>
+
+            </div>
+        </div>
+        <!-- /. ROW  -->
+    </div>
+    <!-- /. PAGE INNER  -->
+</div>
+<!-- /. PAGE WRAPPER  -->
+<!-- Highcharts JavaScript -->
+<script src="/js/highcharts/highcharts.js"></script>
+<script src="/js/highcharts/exporting.js"></script>
+
+<script>
+    function getNewDataPrinter(time,printerName ) {
+        $("#overlayInstanceId").show("fast");
+        $("#overlayWattDataId").show("fast");
+        $("#overlayVAId").show("fast");
+        $.post(
+                "/iot/get3dPrinterData",{
+                    "printerNumber": printerName,
+                    "time": time
+                },
+                function (data) {
+                    var series = [];
+                    var seriesWatt = [];
+                    var seriesVA = [];
+
+                    for(i=0;i<data.tags.length;i++)
+                    {
+                        var oneset = {
+                            type: 'line',
+                            name: data.tags[i].name,
+                            data: data.tags[i].results[0].values
+                        };
+                        if(data.tags[i].name.indexOf("WATT") !== -1)
+                        {
+                            seriesWatt.push(oneset)
+                        }
+                        else if(data.tags[i].name.indexOf("VA") !== -1)
+                        {
+                            seriesVA.push(oneset)
+                        }
+                        else
+                        {
+                            series.push(oneset);
+                        }
+
+                    }
+
+                    // Create the chart
+                    Highcharts.chart('timeSeriesData', {
+                        chart: {
+                            zoomType: 'x'
+                        },
+                        title: {
+                            text: ''
+                        },
+                        subtitle: {
+                            text: ''
+                        },
+                        xAxis: {
+                            type: 'datetime',
+                            title: {
+                                text:  'Time'
+                            }
+                        },
+                        yAxis: {
+                            title: {
+                                text:  "value"
+                            }
+                        },
+                        legend: {
+                            enabled: false
+                        },
+                        tooltip: {
+                            shared: true,
+                            crosshairs: true
+                        },
+                        plotOptions: {
+                            series: {
+                                cursor: 'pointer',
+                                point: {
+                                    events: {
+                                        click: function (e) {
+                                            hs.htmlExpand(null, {
+                                                pageOrigin: {
+                                                    x: e.pageX || e.clientX,
+                                                    y: e.pageY || e.clientY
+                                                },
+                                                headingText: this.series.name,
+                                                maincontentText: Highcharts.dateFormat('%A, %b %e, %Y', this.x) + ':<br/> ' +
+                                                this.y + ' visits',
+                                                width: 200
+                                            });
+                                        }
+                                    }
+                                },
+                                marker: {
+                                    lineWidth: 1
+                                }
+                            }
+                        },
+
+
+                        series: series
+                    });
+                    // Create the chart
+                    Highcharts.chart('wattData', {
+                        chart: {
+                            zoomType: 'x'
+                        },
+                        title: {
+                            text: ''
+                        },
+                        subtitle: {
+                            text: ''
+                        },
+                        xAxis: {
+                            type: 'datetime',
+                            title: {
+                                text:  'Time'
+                            }
+                        },
+                        yAxis: {
+                            title: {
+                                text:  "value"
+                            }
+                        },
+                        legend: {
+                            enabled: false
+                        },
+                        tooltip: {
+                            shared: true,
+                            crosshairs: true
+                        },
+                        plotOptions: {
+                            series: {
+                                cursor: 'pointer',
+                                point: {
+                                    events: {
+                                        click: function (e) {
+                                            hs.htmlExpand(null, {
+                                                pageOrigin: {
+                                                    x: e.pageX || e.clientX,
+                                                    y: e.pageY || e.clientY
+                                                },
+                                                headingText: this.series.name,
+                                                maincontentText: Highcharts.dateFormat('%A, %b %e, %Y', this.x) + ':<br/> ' +
+                                                this.y + ' visits',
+                                                width: 200
+                                            });
+                                        }
+                                    }
+                                },
+                                marker: {
+                                    lineWidth: 1
+                                }
+                            }
+                        },
+
+
+                        series: seriesWatt
+                    });
+                    // Create the chart
+                    Highcharts.chart('VAData', {
+                        chart: {
+                            zoomType: 'x'
+                        },
+                        title: {
+                            text: ''
+                        },
+                        subtitle: {
+                            text: ''
+                        },
+                        xAxis: {
+                            type: 'datetime',
+                            title: {
+                                text:  'Time'
+                            }
+                        },
+                        yAxis: {
+                            title: {
+                                text:  "value"
+                            }
+                        },
+                        legend: {
+                            enabled: false
+                        },
+                        tooltip: {
+                            shared: true,
+                            crosshairs: true
+                        },
+                        plotOptions: {
+                            series: {
+                                cursor: 'pointer',
+                                point: {
+                                    events: {
+                                        click: function (e) {
+                                            hs.htmlExpand(null, {
+                                                pageOrigin: {
+                                                    x: e.pageX || e.clientX,
+                                                    y: e.pageY || e.clientY
+                                                },
+                                                headingText: this.series.name,
+                                                maincontentText: Highcharts.dateFormat('%A, %b %e, %Y', this.x) + ':<br/> ' +
+                                                this.y + ' visits',
+                                                width: 200
+                                            });
+                                        }
+                                    }
+                                },
+                                marker: {
+                                    lineWidth: 1
+                                }
+                            }
+                        },
+
+
+                        series: seriesVA
+                    });
+                    $("#overlayInstanceId").hide("slow");
+                    $("#overlayWattDataId").hide("slow");
+                    $("#overlayVAId").hide("slow");
+                }
+        );
+    }
+    function getNewDataPost() {
+        $("#overlaytimeSeriesDataOptions").show("fast");
+        $.post(
+                "/iot/getTopTagspost",{
+                    "tag": document.getElementById("tag").value,
+                    "num": document.getElementById("numDataPoints").value + document.getElementById("numDataPoints").value,
+                    "time": document.getElementById("numValue").value + document.getElementById("time").value
+                },
+                function (data) {
+
+                    // Create the chart
+                    Highcharts.chart('timeSeriesDataOptions', {
+                        chart: {
+                            zoomType: 'x'
+                        },
+                        title: {
+                            text: ''
+                        },
+                        subtitle: {
+                            text: ''
+                        },
+                        xAxis: {
+                            type: 'datetime'
+                        },
+                        yAxis: {
+                            title: {
+                                text:  data.tags[0].name
+                            }
+                        },
+                        legend: {
+                            enabled: false
+                        },
+                        plotOptions: {
+                            area: {
+                                fillColor: {
+                                    linearGradient: {
+                                        x1: 0,
+                                        y1: 0,
+                                        x2: 0,
+                                        y2: 1
+                                    },
+                                    stops: [
+                                        [0, Highcharts.getOptions().colors[0]],
+                                        [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                                    ]
+                                },
+                                marker: {
+                                    radius: 2
+                                },
+                                lineWidth: 1,
+                                states: {
+                                    hover: {
+                                        lineWidth: 1
+                                    }
+                                },
+                                threshold: null
+                            }
+                        },
+
+                        series: [{
+                            type: 'area',
+                            name: data.tags[0].name,
+                            data: data.tags[0].results[0].values
+                        }]
+                    });
+                    $("#overlaytimeSeriesDataOptions").hide("slow");
+                }
+        );
+    }
+    function saveIssueProblem() {
+        $("#overlaytimeSeriesDataOptions").show("fast");
+        $.post(
+                "/iot/addIssueProblemInformation",{
+                    "raiserInfo":{
+                        "name": document.getElementById("nameIssuer").value,
+                        "email": document.getElementById("emailIssuer").value
+                    },
+                    "machineInfo":{
+                        "machineId": document.getElementById("machineId").value,
+                        "machineDetail": document.getElementById("machineDetail").value,
+
+                    },
+                    "issueInfo":{
+                        "issueTitle": document.getElementById("issueTitle").value,
+                        "issueDetail": document.getElementById("issueDetail").value,
+                        "fromDate": document.getElementById("fromDate").value,
+                        "toDate": document.getElementById("toDate").value
+
+
+                    },
+                    "recvInfo":{
+                        "name": document.getElementById("nameRecv").value,
+                        "email": document.getElementById("emailRecv").value
+                    }
+                },
+                function (data) {
+
+                    if(data)
+                        window.alert("Successfully Added the Issue");
+                    else
+                        window.alert("Error adding the Issue.. Please Try Again");
+                    $("#overlaytimeSeriesDataOptions").hide("slow");
+                }
+        );
+    }
+    function getAllTags(machine, printerName) {
+        $.get(
+                "/iot/getAllTags",
+                function (data) {
+
+                    var tags= data.results;
+                    document.getElementById('tag').innerHTML ='';
+
+                    for(i=0;i<tags.length;i++)
+                    {
+                        substring = machine ;
+                        if(tags[i].indexOf(substring) !== -1 && tags[i][tags[i].length -1]== printerName)
+                            document.getElementById('tag').innerHTML +='<option value=\"'+ tags[i]+ '\" >'+ tags[i] + '</option>' ;
+                    }
+
+
+                }
+        );
+    }
+    getNewDataPrinter('1d-ago', 'A');
+    getAllTags("unternehmer-3dprinters-", 'A');
+    function loadTable(data) {
+        var titles = [];
+        titles.push({"title": "#"});
+        titles.push({"title": "IssueId"});
+        titles.push({"title": "Raiser Name"});
+        titles.push({"title": "Machine Detail"});
+        titles.push({"title": "Issue Title"});
+        titles.push({"title": "Issue Detail"});
+        titles.push({"title": "From Date"});
+        titles.push({"title": "To Date"});
+        titles.push({"title": "Pending On"});
+        titles.push({"title": "Other Information"});
+        titles.push({"title": "Status"});
+        var DataFull = [];
+        $.each(data, function(index, item) {
+            var row = [];
+            row.push(index + 1);
+            row.push(item["issueId"]);
+            row.push(item["info"]["raiserInfo[name]"]);
+            row.push(item["info"]["machineInfo[machineDetail]"]);
+            row.push(item["info"]["issueInfo[issueTitle]"]);
+            row.push(item["info"]["issueInfo[issueDetail]"]);
+            row.push(item["info"]["issueInfo[fromDate]"]);
+            row.push(item["info"]["issueInfo[toDate]"]);
+            row.push(item["info"]["recvInfo[name]"]);
+            row.push("None");
+            if(item["status"] == "OPEN")
+                row.push("<button class=' btn btn-danger' >"+ item["status"] + "</button>");
+            else if(item["status"] == "CLOSED")
+                row.push("<button class=' btn btn-success' >"+ item["status"] + "</button>");
+            else
+                row.push("<button class=' btn btn-info' >"+ item["status"] + "</button>");
+            DataFull.push(row);
+        });
+        oTable=$("#products").dataTable( {
+            data: DataFull,
+            columns:titles,
+            "iDisplayLength": 5,
+            "lengthMenu": [[5, 10, 20,50, -1], [5, 10, 20, 50, "All"]]
+        } );
+
+    }
+    function getAllIssues(){
+        $.get(
+                "/iot/allIssuesList",
+                function (data) {
+
+                    loadTable(data);
+
+
+                }
+        );
+    }
+</script>

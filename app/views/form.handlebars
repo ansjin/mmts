@@ -1,0 +1,89 @@
+<form role="form" action="/saveuserInfo" method="post">
+    <div class="box-body">
+        <table id="example2" class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>Name of the Issuer</td>
+                <td><input type="text" class="form-control" name="nameIssuer" value=""></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Email of the Issuer</td>
+                <td><input type="email" class="form-control" name="emailIssuer" id="exampleInputEmail1" value=""></td>
+            </tr>
+
+            <tr>
+                <td>3</td>
+                <td>Machine Id</td>
+                <td><input class="form-control" id="disabledInput" name="machineId" value="uniquemachineId" type="text" placeholder="Disabled input" disabled=""></td>
+
+            </tr>
+
+
+            <tr>
+                <td>4</td>
+                <td>Issue Problem Title</td>
+                <td><input type="text" class="form-control" name="issueTitle" value=""></td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Issue Problem Detail</td>
+                <td> <textarea class="form-control" name="issueDetail" value="" rows="3"></textarea> </td>
+
+            </tr>
+
+            <tr>
+                <td>6</td>
+                <td>Issue Occuring From</td>
+                <td><input type="date" class="form-control" name="fromDate" value=""></td>
+                <td>To</td>
+                <td><input type="date" class="form-control" name="toDate" value=""></td>
+            </tr>
+
+
+            <tr>
+                <td>3</td>
+                <td>AWS Token</td>
+                <td><input type="text" class="form-control" name="awstoken" value=""></td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>AWS Secret</td>
+                <td><input type="text" class="form-control" name="awssecret" value=""></td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>AWS Key Name</td>
+                <td><input type="text" class="form-control" name="awskeyname" value=""></td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>LRZ info</td>
+                <td><input type="text" class="form-control" name="lrzinfo" value=""></td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>Other</td>
+                <td><input type="text" class="form-control" name="other" value=""></td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <th>#</th>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+    <!-- /.box-body -->
+    <td><input type="submit" class="btn btn-block btn-primary"></td>
+</form>
